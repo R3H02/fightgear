@@ -1,0 +1,20 @@
+Options -Indexes
+php_flag display_errors Off
+
+# Prevent direct access to config files
+<Files "*.php">
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+<FilesMatch "^(database|app)\.php$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# Security headers
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-Frame-Options SAMEORIGIN
+    Header always set X-XSS-Protection "1; mode=block"
+</IfModule>
